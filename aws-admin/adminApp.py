@@ -48,7 +48,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('admin-signup.html')
+    return render_template('login.html')
 
 @app.route("/adminlogin", methods=['GET', 'POST'])
 def AdminLogin():
