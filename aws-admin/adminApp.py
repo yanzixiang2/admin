@@ -23,7 +23,7 @@ table = 'Admin'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('admin-signup.html')
+    return render_template('admin-sigup.html')
 
 
 
@@ -49,6 +49,33 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('admin-signup.html')
+
+@app.route("/adminlogin", methods=['GET', 'POST'])
+def AdminLogin():
+    if request.method == 'POST':
+        admin_email = request.form['admin_email']
+        admin_password = request.form['admin_password']
+
+        select_sql = "SELECT * FROM Admin WHERE email = %s AND password = %s"
+        cursor = db_conn.cursor()
+
+        try:
+            cursor.execute(select_sql, (admin_email, admin_password))
+            admin = cursor.fetchone()
+
+            if admin:
+                # Admin login successful
+                session['admin_email'] = admin_email
+                return render_template('home.html')  # You can redirect to a dashboard or admin page
+            else:
+                return "Admin login failed. Please check your credentials."
+
+        except Exception as e:
+            print(f"Error: {e}")
+        finally:
+            cursor.close()
+
+    return render_template('admin-login.html')
 
 
 if __name__ == '__main__':
