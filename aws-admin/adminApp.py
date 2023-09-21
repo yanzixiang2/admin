@@ -75,7 +75,7 @@ def AdminLogin():
         finally:
             cursor.close()
 
-    return render_template('admin-login.html')
+    return render_template('login.html')
 
 
 if __name__ == '__main__':
