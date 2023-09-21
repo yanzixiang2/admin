@@ -52,30 +52,30 @@ def AddEmp():
 
 @app.route("/adminlogin", methods=['GET', 'POST'])
 def AdminLogin():
-    if request.method == 'POST':
-        admin_email = request.form['admin_email']
-        admin_password = request.form['admin_password']
+    
+    admin_email = request.form['admin_email']
+    admin_password = request.form['admin_password']
+        
+    select_sql = "SELECT * FROM Admin WHERE admin_email = %s AND admin_password = %s"
+    cursor = db_conn.cursor()
 
-        select_sql = "SELECT * FROM Admin WHERE admin_email = %s AND admin_password = %s"
-        cursor = db_conn.cursor()
+    try:
+        cursor.execute(select_sql, (admin_email, admin_password))
+        admin = cursor.fetchone()
 
-        try:
-            cursor.execute(select_sql, (admin_email, admin_password))
-            admin = cursor.fetchone()
+        if admin:
 
-            if admin:
-                # Admin login successful
-                session['admin_email'] = admin_email
-                return render_template('home.html')  # You can redirect to a dashboard or admin page
-            else:
-                return render_template('login.html')
+                
+            return render_template('home.html')  # You can redirect to a dashboard or admin page
+        else:
+            return render_template('login.html')
 
-        except Exception as e:
-            print(f"Error: {e}")
-        finally:
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
             cursor.close()
 
-    return render_template('login.html')
+return render_template('login.html')
 
 
 if __name__ == '__main__':
