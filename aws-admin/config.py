@@ -1,7 +1,7 @@
-customhost = "student.cvpusjsxfpmz.us-east-1.rds.amazonaws.com"
+customhost = "admin.cvpusjsxfpmz.us-east-1.rds.amazonaws.com"
 customuser = "aws_user"
 custompass = "Bait3273"
-customdb = "student"
+customdb = "Admin"
 custombucket = "yanzixiang-student"
 customregion = "us-east-1a"
 
