@@ -23,7 +23,7 @@ table = 'Admin'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('admin-sigup.html')
+    return render_template('admin-signup.html')
 
 
 
