@@ -56,7 +56,7 @@ def AdminLogin():
         admin_email = request.form['admin_email']
         admin_password = request.form['admin_password']
 
-        select_sql = "SELECT * FROM Admin WHERE email = %s AND password = %s"
+        select_sql = "SELECT * FROM Admin WHERE admin_email = %s AND admin_password = %s"
         cursor = db_conn.cursor()
 
         try:
